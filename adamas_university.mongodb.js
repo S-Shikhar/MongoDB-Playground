@@ -230,6 +230,26 @@ if (deletedData) {
   print("Deleted");
 }
 
+/*
+Update all documents in the collection by setting the skills field based on the employee’s ID:
+
+- If the employee ID is odd, assign: ["Java", "Python", "C"]
+- If the employee ID is even, assign: ["JavaScript", "HTML", "Tailwind"]
+*/
+
+db.student_details.find().forEach(employee => {
+  let skills = (employee.employeeNumber % 2 === 0) 
+      ? ["JavaScript", "HTML", "Tailwind"] 
+      : ["Java", "Python", "C"];
+
+  db.student_details.updateOne(
+      { _id: employee._id },
+      { $set: { skills: skills } }
+  );
+});
+
+db.student_details.find()
+
 
 
 
