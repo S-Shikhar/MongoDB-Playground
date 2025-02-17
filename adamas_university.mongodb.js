@@ -188,7 +188,7 @@ jobTitle.forEach((dt) => {
 // Update the employee ID of caskilo pamila to 5555. 
 let data = db.student_details.find();
 
-function update () {
+function update() {
   db.student_details.updateOne(
     { firstName: "Pamela" },
     { $set: { employeeNumber: 5555 } }
@@ -238,18 +238,96 @@ Update all documents in the collection by setting the skills field based on the 
 */
 
 db.student_details.find().forEach(employee => {
-  let skills = (employee.employeeNumber % 2 === 0) 
-      ? ["JavaScript", "HTML", "Tailwind"] 
-      : ["Java", "Python", "C"];
+  let skills = (employee.employeeNumber % 2 === 0)
+    ? ["JavaScript", "HTML", "Tailwind"]
+    : ["Java", "Python", "C"];
 
   db.student_details.updateOne(
-      { _id: employee._id },
-      { $set: { skills: skills } }
+    { _id: employee._id },
+    { $set: { skills: skills } }
   );
 });
 
 db.student_details.find()
 
+// Unset
+
+db.student_details.updateOne(
+  {
+    employeeNumber: 1002
+  },
+  {
+    $unset: {
+      skills: ""
+    }
+  }
+)
+
+db.student_details.findOne({ employeeNumber: 1002 })
 
 
+// set
 
+db.student_details.updateOne(
+  {
+    employeeNumber: 1002
+  },
+  {
+    $set: {
+      "age" : "dob"
+    }
+  }
+)
+
+db.student_details.findOne({ employeeNumber: 1002 })
+
+// rename
+
+db.student_details.updateOne(
+  {
+    employeeNumber: 1002
+
+  },
+  {
+    $rename: { "age": "DOB" }
+  }
+)
+
+db.student_details.findOne({ employeeNumber: 1002 })
+
+/*
+Write a query to Update the salaries of all employees by 10% if the salary is greater than 20,000. 
+In case, there exists no attribute called salary, 
+create an attribute salary with a default value of 3000 assigned to it.
+*/
+
+db.student_details.updateMany(
+  {
+    salary: { $gt: 20000 }
+  },
+  {
+    $mul: { salary: 1.1 }
+  }
+)
+
+db.student_details.updateMany(
+  {
+    employeeNumber: { $mod: [2, 0] }
+  },
+  {
+    $unset: { salary: "" }
+  }
+)
+
+db.student_details.find()
+
+db.student_details.updateMany(
+  {
+    salary: { $exists: false }
+  },
+  {
+    $set: { salary: 3000}
+  }
+)
+
+db.student_details.find()
