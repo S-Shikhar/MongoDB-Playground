@@ -331,3 +331,54 @@ db.student_details.updateMany(
 )
 
 db.student_details.find()
+
+
+// add sales attribute to the collection and different values to the sales attribute to the even and odd employeeNumber
+
+db.employee_details.updateMany(
+  {
+    employeeNumber: { $mod: [2, 0] }
+  },
+  {
+    $set: { sales: 10000 }
+  }
+)
+
+db.employee_details.updateMany(
+  {
+    employeeNumber: { $mod: [2, 1] }
+  },
+  {
+    $set: { sales: 20000 }
+  }
+)
+
+db.employee_details.find()
+
+// Write the mongoDB query to find the maximum and minimum sales in C2 collection with the attribute sales and display the result.
+
+db.employee_details.aggregate([
+  {
+    $group: {
+      _id: null,
+      maxSales: { $max: "$sales" },
+      minSales: { $min: "$sales" }
+    }
+  }
+])
+
+// Write the MongoDB query to find the highest sales in a specific area with the following coordinates (10, 20), (30,40), (60,70)
+
+db.employee_details.aggregate([
+  {
+    $geoNear: {
+      near: { type: "Point", coordinates: [10, 20] },
+      distanceField: "dist.calculated",
+      maxDistance: 5000,
+      spherical: true
+    }
+  }
+])
+
+
+
