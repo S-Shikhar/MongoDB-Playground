@@ -1,0 +1,1 @@
+db.student_details.find();

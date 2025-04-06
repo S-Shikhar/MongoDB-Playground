@@ -4,6 +4,9 @@
 // The current database to use.
 use("adamas_university");
 
+// The collection to use.
+db.createCollection("student_details");
+
 db.student_details.insertMany([
   {
     employeeNumber: 1002,
@@ -168,6 +171,8 @@ db.student_details.insertMany([
 ]);
 
 db.student_details.find().count();
+
+db.student_details.find()
 
 //firstName of all the employees
 let fname = db.student_details.find();
