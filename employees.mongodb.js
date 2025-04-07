@@ -186,9 +186,9 @@ use("sample");
 //     }
 //   ]);
 
+
 // // Find all employees with the job title "Sales Rep"
 // // returns all employees with the job title "Sales Rep" and only the email field
-
 // db.employees.find({jobTitle: "Sales Rep"}, {email: 1, _id: 0})  
 
 // // find all employees whose employeeNumber is greater than 1200
@@ -322,16 +322,19 @@ use("sample");
 // })
 
 
-db.employees.find({
-    skills: {$all: ["Negotiation", "CRM", "Time Management"]}
-})
+// // Find all employees whose skills array contains "Negotiation", "CRM" and "Time Management"
+// db.employees.find({
+//     skills: {$all: ["Negotiation", "CRM", "Time Management"]}
+// })
 
 
-db.employees.find({
-    projects: {$elemMatch: {hours: {$gt: 30}}}
-})
+// // find all employees whose projects hours is greater than 30
+// db.employees.find({
+//     projects: {$elemMatch: {hours: {$gt: 30}}}
+// })
 
 
-db.employees.find({
-    projects: {$elemMatch: {hours: {$gt: 30}, name: "CRM Revamap"}}
-})
+// // find all employees whose projects hours is greater than 30 and name is "CRM Revamap"
+// db.employees.find({
+//     projects: {$elemMatch: {hours: {$gt: 30}, name: "CRM Revamap"}}
+// })
