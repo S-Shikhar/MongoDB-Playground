@@ -338,3 +338,65 @@ use("sample");
 // db.employees.find({
 //     projects: {$elemMatch: {hours: {$gt: 30}, name: "CRM Revamap"}}
 // })
+
+
+// db.employees.find({skills: "CRM", employeeNumber: {$mod: [3, 0]}})
+
+
+// // Find all employees whose skills array exists and has more than 2 elements and less than 5 elements and one of the elements is "Negotiation"
+// db.employees.find({
+//     skills: "Negotiation", 
+//     $expr: 
+//     {$and:[ 
+//         {$gt: [{$size: "$skills"}, 2]}, 
+//         {$lt: [{$size: "$skills"}, 5]}
+//         ]
+//     }
+// })
+
+
+// // Find all employees whose projects array exists and has more than 2 elements and one of the elements is "CRM Revamp"
+// db.employees.find({
+//     projects: {
+//         $exists: true,
+//         $elemMatch: {
+//             hours: {$gt: 40},
+//             name: {$regex: "Revamp"}
+//         }
+//     }
+// })
+
+
+// db.employees.find({jobTitle: "Sales Rep"}).explain("executionStats")
+
+
+// db.employees.createIndex({jobTitle: 1})
+// db.employees.find({jobTitle: "Sales Rep"}).explain("executionStats")
+
+// db.employees.createIndex({jobTitle: 1, officeCode: 1})
+// db.employees.find({jobTitle: "Sales Rep", officeCode: "1"}).explain("executionStats")
+
+// db.employees.createIndex({email: 1})
+// db.employees.find({email: {$regex: "@classicmodelcars.com"}}).explain("executionStats")
+
+
+// db.employees.find({
+//     skills: "CRM",
+//     projects: {
+//         $elemMatch: {
+//             hours: {$gt: 25}
+//         }
+//     },
+//     jobTitle: {$not: {$regex: "Manager"}}
+// })
+
+// db.employees.find({
+//     reportsTo: {$exists: False},
+//     $expr: {$gte: [{$size: "$skills"}, 3]},
+//     projects: {
+//         $elemMatch: {
+//             name: {$regex: "REVIMP"},
+//             hours: {$lte: 40}
+//         }
+//     }
+// })
