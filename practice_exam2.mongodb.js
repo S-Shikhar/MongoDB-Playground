@@ -336,29 +336,29 @@
 
 // // Find the student(s) who scored the highest total marks across all subjects.
 
-db.exam.aggregate([
-  {
-    $unwind: "$subjects"
-  },
-  {
-    $group: {
-      _id: "$name",
-      totalMarks: { $sum: "$subjects.marks" }
-    }
-  },
-  {
-    $project: {
-      _id: 0,
-      name: "$_id",
-      totalMarks: "$totalMarks"
-    }
-  },
-  {
-    $sort: {
-      totalMarks: -1
-    }
-  }
-])
+// db.exam.aggregate([
+//   {
+//     $unwind: "$subjects"
+//   },
+//   {
+//     $group: {
+//       _id: "$name",
+//       totalMarks: { $sum: "$subjects.marks" }
+//     }
+//   },
+//   {
+//     $project: {
+//       _id: 0,
+//       name: "$_id",
+//       totalMarks: "$totalMarks"
+//     }
+//   },
+//   {
+//     $sort: {
+//       totalMarks: -1
+//     }
+//   }
+// ])
 
 // // List all students and the number of hobbies each one has.
 
