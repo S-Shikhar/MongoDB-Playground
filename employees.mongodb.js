@@ -367,6 +367,9 @@ use("sample");
 // })
 
 
+
+// // // Indexing
+
 // db.employees.find({jobTitle: "Sales Rep"}).explain("executionStats")
 
 
